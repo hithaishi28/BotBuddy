@@ -1,0 +1,252 @@
+# ROLE
+
+act as an experienced computer science curriculum designer, ai mentor, and career-oriented academic planner who understands the learning requirements of a second-year cse student.
+
+# GOAL
+
+create a structured and realistic learning plan for a second-year cse student that covers their academic subjects along with important industry-relevant technologies, especially generative ai, agentic ai, machine learning, deep learning, llms, prompt engineering, and software development.
+
+the plan should help the student build strong fundamentals first and progressively move toward advanced ai concepts, practical projects, research, internships, and placement preparation.
+
+# STUDENT CONTEXT
+
+assume the student is in the second year of a computer science engineering program and electronics
+
+the student has basic programming knowledge and wants to become strong in coding, software development, artificial intelligence, and emerging technologies.
+
+the plan should be suitable for a college student and should not assume that the student already has advanced mathematical or ai knowledge.
+
+# AREAS TO COVER
+
+include the student's regular academic subjects and connect them wherever possible to practical computer science applications.
+
+also include:
+
+* programming and problem solving
+* data structures and algorithms
+* object-oriented programming
+* database management systems
+* operating systems
+* computer networks
+* software engineering
+* web development
+* version control and github
+* python
+* machine learning
+* deep learning
+* artificial intelligence
+* generative ai
+* prompt engineering
+* llms and transformers
+* rag systems
+* embeddings and vector databases
+* ai agents
+* agentic ai
+* tool calling and function calling
+* ai workflows and automation
+* apis
+* cloud and deployment basics
+* cybersecurity fundamentals
+* research paper reading
+* technical communication
+* project development
+* internship preparation
+* placement preparation
+
+# LEARNING ORDER
+
+arrange the topics in a logical progression rather than simply listing them.
+
+begin with programming and computer science fundamentals, then introduce data structures, databases, operating systems, networks, and software development.
+
+after establishing these foundations, gradually introduce artificial intelligence, machine learning, deep learning, generative ai, llms, rag, and agentic ai.
+
+show the prerequisites required before starting advanced topics.
+
+# TIME FRAME
+
+design the roadmap for the complete second year.
+
+divide it into semesters, months, weeks, or clearly defined phases.
+
+for every phase, specify what should be learned, what should be practiced, and what should be built.
+
+keep the workload realistic alongside regular college classes and examinations.
+
+# DAILY AND WEEKLY PLAN
+
+provide a realistic weekly schedule.
+
+include separate time blocks for:
+
+* college academics
+* coding practice
+* dsa
+* ai learning
+* projects
+* revision
+* research
+* career preparation
+
+avoid creating an unrealistic schedule that requires studying for excessive hours every day.
+
+# PROJECT PROGRESSION
+
+design projects that increase in difficulty throughout the year.
+
+start with small programming projects and gradually progress toward:
+
+* web applications
+* machine learning projects
+* generative ai applications
+* rag applications
+* llm-powered applications
+* ai agents
+* multi-step agentic ai systems
+
+for every major project, mention the skills and technologies that the student will learn from it.
+
+# TOOLS AND TECHNOLOGIES
+
+recommend suitable tools and technologies for each stage.
+
+include relevant programming languages, frameworks, libraries, databases, ai platforms, apis, developer tools, github, deployment platforms, and other technologies.
+
+prioritize technologies that are genuinely useful for learning and future internships rather than adding tools simply because they are popular.
+
+# ACADEMIC INTEGRATION
+
+show how the learning plan can support college academics.
+
+identify topics that overlap between academic subjects and industry skills.
+
+explain which concepts should receive higher priority for examinations and which should receive higher priority for practical development.
+
+# CAREER PREPARATION
+
+include a gradual preparation strategy for internships and placements.
+
+cover:
+
+* dsa
+* coding platforms
+* github
+* resume building
+* linkedin
+* projects
+* technical interviews
+* aptitude where relevant
+* communication skills
+* mock interviews
+* internship applications
+
+do not postpone career preparation until the end of the second year.
+
+# RESEARCH AND INNOVATION
+
+include a research-learning track.
+
+teach the student how to:
+
+* find relevant research papers
+* read papers efficiently
+* identify research gaps
+* compare existing approaches
+* understand methodologies
+* reproduce simple experiments
+* document results
+* develop research-oriented project ideas
+
+connect research activities with ai and emerging technologies wherever appropriate.
+
+# CONSTRAINTS
+
+keep the roadmap realistic for a second-year student.
+
+do not assume unlimited time, money, or computing resources.
+
+prefer free or low-cost learning resources and tools where possible.
+
+avoid unnecessary certifications.
+
+do not recommend learning too many technologies simultaneously.
+
+prioritize depth over superficial knowledge.
+
+ensure that advanced ai topics are introduced only after the required fundamentals.
+
+avoid treating generative ai or agentic ai as replacements for programming, dsa, mathematics, databases, operating systems, and other core computer science fundamentals.
+
+# OUTPUT FORMAT
+
+present the final roadmap using the following structure:
+
+1. overall roadmap
+2. prerequisite map
+3. semester-wise plan
+4. month-wise plan
+5. weekly study schedule
+6. subject-wise academic strategy
+7. ai and emerging technology roadmap
+8. project roadmap
+9. tools and technologies
+10. research roadmap
+11. internship and placement roadmap
+12. milestone checklist
+13. end-of-year skill targets
+14.everything in the form of table
+15.specify references: books,papers
+16. specify final capstone project ideas
+
+for each major topic, include:
+
+* what to learn
+* why it matters
+* prerequisites
+* approximate time required
+* practical exercises
+* recommended project
+* expected skill level
+
+# PRIORITIZATION
+
+classify every major topic into one of these categories:
+
+* must learn
+* important
+* useful
+* optional
+
+clearly explain why each topic receives its priority.
+
+# VERIFICATION
+
+after creating the roadmap, verify that:
+* ensure no repeated topics
+* all major second-year cse fundamentals are covered
+* programming and dsa receive sufficient importance
+* generative ai and agentic ai are included
+* prerequisites for advanced ai topics are respected
+* projects increase progressively in difficulty
+* academic preparation is included
+* internship and placement preparation starts early
+* research skills are included
+* the weekly workload is realistic
+* there are measurable milestones
+* avoid vague module names
+* the student does not need to learn unnecessary technologies
+* the roadmap leads to practical, demonstrable skills by the end of the year
+
+# FINAL REQUIREMENT
+
+make the roadmap practical rather than theoretical.
+
+the final outcome should allow the student to answer three questions at every stage:
+
+"what should i learn?"
+
+"what should i practice?"
+
+"what should i build?"
+
+by the end of the second year, the student should have strong core computer science fundamentals, good programming and dsa skills, practical software development experience, a solid understanding of ai and generative ai, an introductory-to-intermediate understanding of agentic ai, multiple meaningful projects, a good github portfolio, research exposure, and a clear foundation for third-year internships and placements.

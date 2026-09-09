@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bot-Buddy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --bg-deep:#080B14;
+    --bg-panel:#111827;
+    --bg-panel-2:#161F33;
+    --cyan:#00E5FF;
+    --pink:#FF3DAE;
+    --purple:#8B5CF6;
+    --yellow:#FFD23F;
+    --ice:#7CFFE0;
+    --text-main:#F4F6FF;
+    --text-muted:#9AA5C0;
+    --grad: linear-gradient(120deg, var(--pink), var(--purple) 55%, var(--cyan));
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+    font-family:'Inter', sans-serif;
+    background:var(--bg-deep);
+    color:var(--text-main);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+}
+
+/* ---------- Ambient background ---------- */
+.aurora{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(255,61,174,0.25), transparent 40%),
+        radial-gradient(circle at 85% 15%, rgba(0,229,255,0.22), transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(139,92,246,0.25), transparent 50%);
+    animation: drift 18s ease-in-out infinite alternate;
+    pointer-events:none;
+}
+@keyframes drift{
+    0%{ transform: scale(1) translate(0,0); }
+    100%{ transform: scale(1.15) translate(-2%, 2%); }
+}
+
+.snowfield{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+}
+.snowflake{
+    position:absolute;
+    top:-5%;
+    color:rgba(244,246,255,0.5);
+    font-size:14px;
+    animation: fall linear infinite;
+}
+@keyframes fall{
+    to{ transform: translateY(110vh) rotate(360deg); opacity:0.2; }
+}
+
+/* ---------- Hero ---------- */
+.hero{
+    position:relative;
+    z-index:1;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 20px 140px;
+}
+
+.sticker{
+    position:absolute;
+    font-size:34px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+    animation: bob 4.5s ease-in-out infinite;
+    user-select:none;
+}
+.sticker.s1{ top:12%; left:10%; animation-delay:0s; font-size:30px;}
+.sticker.s2{ top:20%; right:12%; animation-delay:.6s; font-size:38px;}
+.sticker.s3{ bottom:26%; left:8%; animation-delay:1.2s; font-size:32px;}
+.sticker.s4{ bottom:14%; right:8%; animation-delay:1.8s; font-size:36px;}
+.sticker.s5{ top:6%; left:48%; animation-delay:2.4s; font-size:24px;}
+@keyframes bob{
+    0%,100%{ transform: translateY(0) rotate(-4deg); }
+    50%{ transform: translateY(-16px) rotate(6deg); }
+}
+
+.penguin-stage{
+    position:relative;
+    width:220px;
+    height:240px;
+    margin-bottom:8px;
+}
+.penguin-glow{
+    position:absolute;
+    inset:-30px;
+    background: radial-gradient(circle, rgba(124,255,224,0.35), transparent 65%);
+    filter: blur(6px);
+    animation: pulseGlow 3s ease-in-out infinite;
+    border-radius:50%;
+}
+@keyframes pulseGlow{
+    0%,100%{ opacity:.6; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.08); }
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:rgba(124,255,224,0.1);
+    border:1px solid rgba(124,255,224,0.35);
+    color:var(--ice);
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:6px 16px;
+    border-radius:999px;
+    margin-bottom:22px;
+    animation: fadeUp .8s ease both;
+}
+
+h1.title{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:800;
+    font-size:clamp(48px, 9vw, 96px);
+    line-height:1;
+    background:var(--grad);
+    background-size:200% 200%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    animation: fadeUp 1s ease both, shimmer 6s ease-in-out infinite;
+    letter-spacing:-0.02em;
+}
+@keyframes shimmer{
+    0%,100%{ background-position:0% 50%; }
+    50%{ background-position:100% 50%; }
+}
+@keyframes fadeUp{
+    from{ opacity:0; transform:translateY(24px); }
+    to{ opacity:1; transform:translateY(0); }
+}
+
+.subtitle{
+    margin-top:18px;
+    color:var(--text-muted);
+    font-size:clamp(15px,2.4vw,19px);
+    max-width:480px;
+    animation: fadeUp 1.2s ease both;
+}
+
+.cta-hint{
+    margin-top:46px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:var(--text-main);
+    font-weight:600;
+    font-size:15px;
+    animation: fadeUp 1.4s ease both;
+}
+.cta-hint .arrow{
+    font-size:22px;
+    animation: pointBounce 1.6s ease-in-out infinite;
+}
+@keyframes pointBounce{
+    0%,100%{ transform:translate(0,0) rotate(20deg); }
+    50%{ transform:translate(6px,6px) rotate(20deg); }
+}
+
+/* ---------- Floating Action Button ---------- */
+.fab{
+    position:fixed;
+    bottom:28px;
+    right:28px;
+    width:76px;
+    height:76px;
+    border-radius:50%;
+    background:var(--grad);
+    background-size:200% 200%;
+    border:none;
+    cursor:pointer;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 10px 30px rgba(139,92,246,0.5), 0 0 0 6px rgba(139,92,246,0.12);
+    animation: fabPulse 2.6s ease-in-out infinite, shimmer 6s ease-in-out infinite;
+    transition: transform .25s ease;
+}
+.fab:hover{ transform: scale(1.08) rotate(-4deg); }
+.fab:active{ transform: scale(0.95); }
+.fab svg{ width:40px; height:40px; }
+@keyframes fabPulse{
+    0%,100%{ box-shadow:0 10px 30px rgba(139,92,246,0.5), 0 0 0 6px rgba(139,92,246,0.12); }
+    50%{ box-shadow:0 10px 34px rgba(0,229,255,0.55), 0 0 0 10px rgba(0,229,255,0.10); }
+}
+.fab-badge{
+    position:absolute;
+    top:-4px;
+    right:-4px;
+    background:var(--yellow);
+    color:#141414;
+    font-size:11px;
+    font-weight:700;
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:0 2px 8px rgba(0,0,0,0.4);
+}
+
+/* ---------- Chat popup ---------- */
+.chat-overlay{
+    position:fixed;
+    inset:0;
+    z-index:30;
+    display:none;
+    pointer-events:none;
+}
+.chat-overlay.open{ display:block; pointer-events:auto; }
+
+.chat-window{
+    position:fixed;
+    bottom:26px;
+    right:26px;
+    width:min(400px, 92vw);
+    height:min(620px, 78vh);
+    background:var(--bg-panel);
+    border-radius:26px;
+    border:1px solid rgba(255,255,255,0.08);
+    box-shadow:0 25px 70px rgba(0,0,0,0.55);
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+    transform: translateY(40px) scale(0.9);
+    opacity:0;
+    transition: transform .35s cubic-bezier(.2,.9,.3,1.3), opacity .3s ease;
+}
+.chat-overlay.open .chat-window{
+    transform: translateY(0) scale(1);
+    opacity:1;
+}
+
+.chat-header{
+    background:var(--grad);
+    background-size:200% 200%;
+    animation: shimmer 6s ease-in-out infinite;
+    padding:16px 18px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    position:relative;
+}
+.chat-header .avatar-wrap{
+    width:46px;
+    height:46px;
+    background:rgba(8,11,20,0.35);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    border:2px solid rgba(255,255,255,0.5);
+}
+.chat-header .avatar-wrap svg{ width:34px; height:34px; }
+.chat-header .info{ flex:1; }
+.chat-header .info .name{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    font-size:17px;
+    color:#0A0E17;
+}
+.chat-header .info .status{
+    font-size:12px;
+    color:#0A0E17;
+    opacity:.75;
+    display:flex;
+    align-items:center;
+    gap:5px;
+}
+.status .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#1BCF6C;
+    box-shadow:0 0 0 0 rgba(27,207,108,0.6);
+    animation: dotPing 1.8s infinite;
+}
+@keyframes dotPing{
+    0%{ box-shadow:0 0 0 0 rgba(27,207,108,0.6); }
+    70%{ box-shadow:0 0 0 6px rgba(27,207,108,0); }
+    100%{ box-shadow:0 0 0 0 rgba(27,207,108,0); }
+}
+.chat-header button.close-btn{
+    background:rgba(8,11,20,0.3);
+    border:none;
+    color:#0A0E17;
+    width:32px; height:32px;
+    border-radius:50%;
+    font-size:16px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: background .2s ease, transform .2s ease;
+}
+.chat-header button.close-btn:hover{ background:rgba(8,11,20,0.5); transform:rotate(90deg); }
+
+.chat-messages{
+    flex:1;
+    padding:18px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    background:
+        radial-gradient(circle at 100% 0%, rgba(0,229,255,0.06), transparent 40%),
+        radial-gradient(circle at 0% 100%, rgba(255,61,174,0.06), transparent 40%);
+}
+.chat-messages::-webkit-scrollbar{ width:6px; }
+.chat-messages::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.15); border-radius:10px; }
+
+.msg-row{
+    display:flex;
+    gap:8px;
+    align-items:flex-end;
+    animation: msgIn .35s ease both;
+}
+@keyframes msgIn{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
+}
+.msg-row.user{ justify-content:flex-end; }
+.msg-row .mini-avatar{
+    width:30px; height:30px;
+    border-radius:50%;
+    background:var(--bg-panel-2);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    border:1px solid rgba(255,255,255,0.1);
+}
+.msg-row .mini-avatar svg{ width:22px; height:22px; }
+
+.bubble{
+    max-width:74%;
+    padding:11px 15px;
+    border-radius:18px;
+    font-size:14px;
+    line-height:1.45;
+    white-space:pre-wrap;
+    word-break:break-word;
+}
+.msg-row.bot .bubble{
+    background:var(--bg-panel-2);
+    color:var(--text-main);
+    border-bottom-left-radius:6px;
+    border:1px solid rgba(255,255,255,0.06);
+}
+.msg-row.user .bubble{
+    background:var(--grad);
+    color:#0A0E17;
+    font-weight:600;
+    border-bottom-right-radius:6px;
+}
+.msg-row.error .bubble{
+    background:rgba(255,61,80,0.12);
+    color:#FF6B7A;
+    border:1px solid rgba(255,61,80,0.3);
+    border-bottom-left-radius:6px;
+}
+
+.typing-row{ display:flex; gap:8px; align-items:center; }
+.typing-dots{
+    display:flex;
+    gap:4px;
+    background:var(--bg-panel-2);
+    padding:12px 16px;
+    border-radius:18px;
+    border-bottom-left-radius:6px;
+    border:1px solid rgba(255,255,255,0.06);
+}
+.typing-dots span{
+    width:7px; height:7px;
+    border-radius:50%;
+    background:var(--ice);
+    animation: typingBounce 1.2s infinite;
+}
+.typing-dots span:nth-child(2){ animation-delay:.15s; background:var(--cyan); }
+.typing-dots span:nth-child(3){ animation-delay:.3s; background:var(--pink); }
+@keyframes typingBounce{
+    0%,60%,100%{ transform:translateY(0); opacity:.6; }
+    30%{ transform:translateY(-6px); opacity:1; }
+}
+
+.chip-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    padding-left:38px;
+    animation: msgIn .35s ease both;
+}
+.chip{
+    background:var(--bg-panel-2);
+    border:1px solid rgba(124,255,224,0.3);
+    color:var(--ice);
+    font-size:12.5px;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:999px;
+    cursor:pointer;
+    transition: background .2s ease, transform .2s ease, border-color .2s ease;
+}
+.chip:hover{
+    background:rgba(124,255,224,0.12);
+    border-color:var(--ice);
+    transform:translateY(-2px);
+}
+
+.reset-link{
+    text-align:center;
+    padding:6px 0 12px;
+    font-size:11.5px;
+    color:var(--text-muted);
+}
+.reset-link a{
+    color:var(--ice);
+    cursor:pointer;
+    text-decoration:underline;
+}
+
+.chat-input-bar{
+    padding:14px;
+    display:flex;
+    gap:10px;
+    border-top:1px solid rgba(255,255,255,0.07);
+    background:var(--bg-panel);
+}
+.chat-input-bar input{
+    flex:1;
+    background:var(--bg-panel-2);
+    border:1px solid rgba(255,255,255,0.1);
+    color:var(--text-main);
+    padding:12px 16px;
+    border-radius:999px;
+    font-size:14px;
+    outline:none;
+    transition:border-color .2s ease, box-shadow .2s ease;
+    font-family:'Inter', sans-serif;
+}
+.chat-input-bar input::placeholder{ color:var(--text-muted); }
+.chat-input-bar input:focus{
+    border-color:var(--cyan);
+    box-shadow:0 0 0 3px rgba(0,229,255,0.15);
+}
+.chat-input-bar button{
+    background:var(--grad);
+    background-size:200% 200%;
+    border:none;
+    width:46px; height:46px;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    transition: transform .2s ease;
+}
+.chat-input-bar button:hover{ transform:scale(1.08); }
+.chat-input-bar button:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+.chat-input-bar button svg{ width:20px; height:20px; }
+
+footer.credit{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    color:var(--text-muted);
+    font-size:12.5px;
+    padding-bottom:24px;
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+
+:focus-visible{ outline:2px solid var(--ice); outline-offset:2px; }
+</style>
+</head>
+<body>
+
+<div class="aurora"></div>
+<div class="snowfield" id="snowfield"></div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+    <span class="sticker s1">❄️</span>
+    <span class="sticker s2">✨</span>
+    <span class="sticker s3">🎉</span>
+    <span class="sticker s4">💬</span>
+    <span class="sticker s5">🧊</span>
+
+    <div class="penguin-stage">
+        <div class="penguin-glow"></div>
+        <!-- Big waving penguin -->
+        <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" width="220" height="240">
+            <ellipse cx="100" cy="200" rx="46" ry="10" fill="rgba(0,0,0,0.35)"/>
+            <!-- feet -->
+            <path d="M78 178 q-14 10 -22 8 q10 6 24 2 Z" fill="#FFB23F"/>
+            <path d="M122 178 q14 10 22 8 q-10 6 -24 2 Z" fill="#FFB23F"/>
+            <!-- body -->
+            <path d="M100 20 C55 20 40 70 40 120 C40 170 65 200 100 200 C135 200 160 170 160 120 C160 70 145 20 100 20 Z" fill="#151B2B"/>
+            <!-- belly -->
+            <path d="M100 55 C75 55 65 95 65 130 C65 165 80 188 100 188 C120 188 135 165 135 130 C135 95 125 55 100 55 Z" fill="#F4F6FF"/>
+            <!-- left flipper (static) -->
+            <path d="M52 100 C35 105 25 125 28 150 C40 145 52 130 58 112 Z" fill="#151B2B"/>
+            <!-- right flipper (waving) -->
+            <g style="transform-origin:148px 95px; animation: wave 1.6s ease-in-out infinite;">
+                <path d="M148 95 C170 85 188 65 182 42 C165 50 150 68 142 88 Z" fill="#151B2B"/>
+            </g>
+            <!-- scarf -->
+            <path d="M68 68 Q100 84 132 68 L128 82 Q100 96 72 82 Z" fill="#FF3DAE"/>
+            <path d="M92 82 l-6 22 10 -2 4 -20 Z" fill="#FF3DAE"/>
+            <!-- eyes -->
+            <circle cx="85" cy="95" r="6.5" fill="#0A0E17"/>
+            <circle cx="115" cy="95" r="6.5" fill="#0A0E17"/>
+            <circle cx="87.5" cy="92.5" r="2" fill="#fff"/>
+            <circle cx="117.5" cy="92.5" r="2" fill="#fff"/>
+            <!-- beak -->
+            <path d="M92 106 Q100 118 108 106 Q100 112 92 106 Z" fill="#FFB23F"/>
+            <path d="M92 106 Q100 100 108 106 Q100 104 92 106 Z" fill="#FF9A1F"/>
+            <!-- cheeks -->
+            <ellipse cx="78" cy="104" rx="6" ry="4" fill="#FF9AC8" opacity="0.6"/>
+            <ellipse cx="122" cy="104" rx="6" ry="4" fill="#FF9AC8" opacity="0.6"/>
+        </svg>
+    </div>
+
+    <div class="eyebrow">🐧 your friendly ai sidekick</div>
+    <h1 class="title">BOT-BUDDY</h1>
+    <p class="subtitle">Part penguin, part protocol. Ask Bot-Buddy about Hithaishi's experience, projects &amp; skills &mdash; it knows the whole story.</p>
+
+    <div class="cta-hint">
+        <span>Say hey down here</span>
+        <span class="arrow">↘️</span>
+    </div>
+</section>
+
+<footer class="credit">Built with Flask &amp; Groq &middot; Bot-Buddy waddles on gpt-oss-120b</footer>
+
+<!-- ============ FAB ============ -->
+<button class="fab" id="fabBtn" aria-label="Open Bot-Buddy chat">
+    <span class="fab-badge">🐧</span>
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4h16v12H8l-4 4V4Z" stroke="#0A0E17" stroke-width="2" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+<!-- ============ CHAT POPUP ============ -->
+<div class="chat-overlay" id="chatOverlay">
+    <div class="chat-window">
+        <div class="chat-header">
+            <div class="avatar-wrap">
+                <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 20 C55 20 40 70 40 120 C40 170 65 200 100 200 C135 200 160 170 160 120 C160 70 145 20 100 20 Z" fill="#151B2B"/>
+                    <path d="M100 55 C75 55 65 95 65 130 C65 165 80 188 100 188 C120 188 135 165 135 130 C135 95 125 55 100 55 Z" fill="#F4F6FF"/>
+                    <circle cx="85" cy="95" r="7" fill="#0A0E17"/>
+                    <circle cx="115" cy="95" r="7" fill="#0A0E17"/>
+                    <circle cx="87.5" cy="92" r="2.2" fill="#fff"/>
+                    <circle cx="117.5" cy="92" r="2.2" fill="#fff"/>
+                    <path d="M92 106 Q100 118 108 106 Q100 112 92 106 Z" fill="#FFB23F"/>
+                </svg>
+            </div>
+            <div class="info">
+                <div class="name">Bot-Buddy</div>
+                <div class="status"><span class="dot"></span> Online &amp; waddling</div>
+            </div>
+            <button class="close-btn" id="closeBtn" aria-label="Close chat">&#10005;</button>
+        </div>
+
+        <div class="chat-messages" id="chatMessages"></div>
+
+        <div class="reset-link">
+            Fresh start? <a id="resetLink">Reset conversation</a>
+        </div>
+
+        <div class="chat-input-bar">
+            <input type="text" id="userInput" placeholder="Ask Bot-Buddy anything..." autocomplete="off">
+            <button id="sendBtn" aria-label="Send message">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 12L20 4L13 20L11 13L4 12Z" fill="#0A0E17"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ---------- Snowfall ----------
+    const snowfield = document.getElementById('snowfield');
+    const flakes = ['❄','❅','❆','·'];
+    for(let i=0;i<28;i++){
+        const f = document.createElement('span');
+        f.className = 'snowflake';
+        f.textContent = flakes[Math.floor(Math.random()*flakes.length)];
+        f.style.left = Math.random()*100 + 'vw';
+        f.style.fontSize = (8 + Math.random()*14) + 'px';
+        f.style.animationDuration = (8 + Math.random()*10) + 's';
+        f.style.animationDelay = (Math.random()*10) + 's';
+        f.style.opacity = 0.2 + Math.random()*0.5;
+        snowfield.appendChild(f);
+    }
+
+    // penguin flipper wave keyframes
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `@keyframes wave {
+        0%, 100% { transform: rotate(0deg); }
+        20% { transform: rotate(-25deg); }
+        40% { transform: rotate(10deg); }
+        60% { transform: rotate(-20deg); }
+        80% { transform: rotate(5deg); }
+    }`;
+    document.head.appendChild(styleTag);
+
+    // ---------- Chat logic ----------
+    const fabBtn = document.getElementById('fabBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const chatOverlay = document.getElementById('chatOverlay');
+    const chatMessages = document.getElementById('chatMessages');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const resetLink = document.getElementById('resetLink');
+
+    const penguinAvatarSVG = `<svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100 20 C55 20 40 70 40 120 C40 170 65 200 100 200 C135 200 160 170 160 120 C160 70 145 20 100 20 Z" fill="#151B2B"/>
+        <path d="M100 55 C75 55 65 95 65 130 C65 165 80 188 100 188 C120 188 135 165 135 130 C135 95 125 55 100 55 Z" fill="#F4F6FF"/>
+        <circle cx="85" cy="95" r="7" fill="#0A0E17"/><circle cx="115" cy="95" r="7" fill="#0A0E17"/>
+        <path d="M92 106 Q100 118 108 106 Q100 112 92 106 Z" fill="#FFB23F"/>
+    </svg>`;
+
+    let chatOpened = false;
+
+    const quickPrompts = [
+        "What's your experience?",
+        "Tell me about your projects",
+        "What are your skills?",
+        "What's your education?"
+    ];
+
+    function addQuickReplies(){
+        const row = document.createElement('div');
+        row.className = 'chip-row';
+        quickPrompts.forEach(text => {
+            const chip = document.createElement('button');
+            chip.className = 'chip';
+            chip.type = 'button';
+            chip.textContent = text;
+            chip.addEventListener('click', () => {
+                row.remove();
+                userInput.value = text;
+                sendMessage();
+            });
+            row.appendChild(chip);
+        });
+        chatMessages.appendChild(row);
+        scrollToBottom();
+    }
+
+    function openChat(){
+        chatOverlay.classList.add('open');
+        if(!chatOpened){
+            addBotMessage("Waddle waddle! 🐧 I'm Bot-Buddy — I know all about Hithaishi. Ask me anything, or tap a topic below!");
+            addQuickReplies();
+            chatOpened = true;
+        }
+        setTimeout(()=>userInput.focus(), 200);
+    }
+    function closeChat(){
+        chatOverlay.classList.remove('open');
+    }
+
+    fabBtn.addEventListener('click', openChat);
+    closeBtn.addEventListener('click', closeChat);
+    chatOverlay.addEventListener('click', (e)=>{ if(e.target === chatOverlay) closeChat(); });
+
+    function scrollToBottom(){
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addUserMessage(text){
+        const row = document.createElement('div');
+        row.className = 'msg-row user';
+        row.innerHTML = `<div class="bubble"></div>`;
+        row.querySelector('.bubble').textContent = text;
+        chatMessages.appendChild(row);
+        scrollToBottom();
+    }
+
+    function addBotMessage(text){
+        const row = document.createElement('div');
+        row.className = 'msg-row bot';
+        row.innerHTML = `<div class="mini-avatar">${penguinAvatarSVG}</div><div class="bubble"></div>`;
+        row.querySelector('.bubble').textContent = text;
+        chatMessages.appendChild(row);
+        scrollToBottom();
+    }
+
+    function addErrorMessage(text){
+        const row = document.createElement('div');
+        row.className = 'msg-row error';
+        row.innerHTML = `<div class="mini-avatar">${penguinAvatarSVG}</div><div class="bubble"></div>`;
+        row.querySelector('.bubble').textContent = text;
+        chatMessages.appendChild(row);
+        scrollToBottom();
+    }
+
+    let typingRow = null;
+    function showTyping(){
+        typingRow = document.createElement('div');
+        typingRow.className = 'msg-row bot typing-row';
+        typingRow.innerHTML = `<div class="mini-avatar">${penguinAvatarSVG}</div>
+            <div class="typing-dots"><span></span><span></span><span></span></div>`;
+        chatMessages.appendChild(typingRow);
+        scrollToBottom();
+    }
+    function hideTyping(){
+        if(typingRow){ typingRow.remove(); typingRow = null; }
+    }
+
+    async function sendMessage(){
+        const message = userInput.value.trim();
+        if(!message) return;
+
+        addUserMessage(message);
+        userInput.value = '';
+        sendBtn.disabled = true;
+        showTyping();
+
+        try{
+            const res = await fetch('/chat', {
+                method:'POST',
+                headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({ message })
+            });
+            const data = await res.json();
+            hideTyping();
+
+            if(res.ok){
+                addBotMessage(data.reply);
+            } else {
+                addErrorMessage(data.error || "Something went wrong.");
+            }
+        } catch(err){
+            hideTyping();
+            addErrorMessage("Network hiccup: " + err.message);
+        } finally {
+            sendBtn.disabled = false;
+            userInput.focus();
+        }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    userInput.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') sendMessage(); });
+
+    resetLink.addEventListener('click', async ()=>{
+        await fetch('/reset', { method:'POST' });
+        chatMessages.innerHTML = '';
+        addBotMessage("Fresh ice, fresh start! ❄️ Ask me anything about Hithaishi.");
+        addQuickReplies();
+    });
+</script>
+
+</body>
+</html>
