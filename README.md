@@ -1,6 +1,6 @@
 # BotBuddy
 
-A friendly and versatile bot companion designed to help you with various tasks and interactions.
+A friendly and versatile bot companion designed to help you with various tasks and interactions. Built with Flask for a seamless web-based experience.
 
 ## 📋 Table of Contents
 
@@ -14,17 +14,19 @@ A friendly and versatile bot companion designed to help you with various tasks a
 
 ## ✨ Features
 
-- **User-Friendly Interface** - Easy to interact with and understand
+- **Web-Based Interface** - Access via your browser at http://127.0.0.1:5000
+- **User-Friendly Design** - Easy to interact with and understand
 - **Multi-Purpose Functionality** - Handles various tasks and use cases
 - **Lightweight & Efficient** - Minimal resource consumption
 - **Extensible Architecture** - Simple to add new features and capabilities
 - **Well-Documented** - Clear guides and examples included
+- **Flask Framework** - Reliable and scalable web application foundation
 
 ## 🚀 Installation
 
 ### Prerequisites
 - Python 3.8 or higher
-- [List any other dependencies]
+- pip (Python package manager)
 
 ### Steps
 
@@ -39,7 +41,7 @@ cd BotBuddy
 pip install -r requirements.txt
 ```
 
-3. Configure your settings:
+3. Configure your settings (if needed):
 ```bash
 cp config.example.json config.json
 # Edit config.json with your settings
@@ -49,17 +51,21 @@ cp config.example.json config.json
 
 ### Quick Start
 
+The application runs as a Flask web server. Simply execute:
+
 ```bash
 python app.py
 ```
 
-### Basic Example
+The Flask development server will start and be accessible at:
+- Local: `http://127.0.0.1:5000`
+- Network: `http://192.168.0.107:5000` (or your machine's IP address)
 
-```python
-from bot_buddy import BotBuddy
+### Accessing the Application
 
-bot = BotBuddy()
-bot.start()
+Once the server is running, open your web browser and navigate to:
+```
+http://127.0.0.1:5000
 ```
 
 ### Configuration
@@ -89,6 +95,13 @@ pip install -r requirements-dev.txt
 pytest tests/
 ```
 
+### Debug Mode
+
+The application runs in debug mode by default when using `python app.py`, which provides:
+- Automatic server restart on code changes
+- Interactive debugger for troubleshooting
+- Detailed error messages
+
 ## 🤝 Contributing
 
 Contributions are welcome! To contribute:
@@ -116,7 +129,8 @@ If you encounter any issues or have questions:
 ## 🙏 Acknowledgments
 
 - Thanks to all contributors and supporters
-- [List any libraries, inspirations, or resources]
+- Built with [Flask](https://flask.palletsprojects.com/)
+- [List any other libraries, inspirations, or resources]
 
 ---
 
