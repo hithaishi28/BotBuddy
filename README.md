@@ -50,7 +50,7 @@ cp config.example.json config.json
 ### Quick Start
 
 ```bash
-python bot_buddy.py
+python app.py
 ```
 
 ### Basic Example
