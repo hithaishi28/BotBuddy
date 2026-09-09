@@ -59,7 +59,7 @@ python app.py
 
 The Flask development server will start and be accessible at:
 - Local: `http://127.0.0.1:5000`
-- Network: `http://192.168.0.107:5000` (or your machine's IP address)
+- Network: `http://<your-machine-ip>:5000` (replace with your machine's IP address)
 
 ### Accessing the Application
 
